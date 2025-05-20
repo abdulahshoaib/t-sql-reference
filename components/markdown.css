@@ -1,0 +1,122 @@
+.markdown {
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+.markdown ul,
+.markdown ol {
+  padding-left: 1.5em;
+  margin-bottom: 1rem;
+}
+
+.markdown li {
+  margin-bottom: 0.25em;
+}
+
+.markdown h2 a,
+.markdown h3 a,
+.markdown h4 a {
+  position: relative;
+  color: inherit;
+  text-decoration: none;
+}
+
+.markdown h2 a::before,
+.markdown h3 a::before,
+.markdown h4 a::before {
+  content: '🔗';
+  position: absolute;
+  left: -2.5rem;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.markdown h2:hover a::before,
+.markdown h3:hover a::before,
+.markdown h4:hover a::before {
+  opacity: 1;
+}
+
+.markdown a {
+  color: #0070f3;
+  text-decoration: underline;
+}
+
+.markdown pre {
+  background: #0d1117;
+  color: #c9d1d9;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+}
+
+.markdown code {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.95em;
+  background: #1f2937;
+  border-radius: 8px;
+}
+
+.markdown {
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.75;
+  color: #e5e7eb;
+  max-width: 800px;
+  margin: auto;
+  padding: 0rem;
+}
+
+.markdown p {
+  margin: em 0;
+}
+
+.markdown h1 {
+  font-size: 2.25rem;  /* ~36px */
+  font-weight: 700;
+}
+
+.markdown h2 {
+  font-size: 1.875rem;  /* ~30px */
+  font-weight: 600;
+}
+
+.markdown h3 {
+  font-size: 1.5rem;    /* ~24px */
+  font-weight: 600;
+}
+
+.markdown h4 {
+  font-size: 1.25rem;   /* ~20px */
+  font-weight: 500;
+}
+
+.markdown h5 {
+  font-size: 1.125rem;  /* ~18px */
+  font-weight: 500;
+}
+
+.markdown h6 {
+  font-size: 1rem;      /* ~16px */
+  font-weight: 500;
+}
+
+.markdown h1,
+.markdown h2,
+.markdown h3,
+.markdown h4,
+.markdown h5,
+.markdown h6 {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.markdown blockquote {
+  border: none;
+  padding-left: 1rem;
+  color: #9ca3af;
+  margin: 1rem 0;
+  font-style: italic;
+  background: #1f2937;
+}
+
+
