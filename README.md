@@ -1,7 +1,6 @@
-<<<<<<< HEAD
-# Comprehensive T-SQL Reference Guide
+## Comprehensive T-SQL Reference Guide
 
-## Table of Contents
+### Table of Contents
 1. [Data Query Language (DQL)](#data-query-language-dql)
    - [SELECT Statement](#select-statement)
    - [Joins](#joins)
@@ -156,7 +155,7 @@ Nested queries (or subqueries) are queries embedded within another query.
    ```sql
    SELECT e.FirstName, e.LastName, d.DepartmentName
    FROM Employees e
-   INNER JOIN (SELECT * FROM Departments WHERE Location = 'New York') d 
+   INNER JOIN (SELECT * FROM Departments WHERE Location = 'New York') d
    ON e.DepartmentID = d.DepartmentID;
    ```
 
@@ -279,7 +278,7 @@ VALUES (value1, value2, ...);
 
 -- For multiple rows
 INSERT INTO table_name (column1, column2, ...)
-VALUES 
+VALUES
     (value1, value2, ...),
     (value1, value2, ...),
     ...;
@@ -294,12 +293,12 @@ WHERE condition;
 **Examples:**
 ```sql
 -- Insert a single row
-INSERT INTO Employees (FirstName, LastName, Email, DepartmentID) 
+INSERT INTO Employees (FirstName, LastName, Email, DepartmentID)
 VALUES ('John', 'Smith', 'john.smith@example.com', 1);
 
 -- Insert multiple rows
-INSERT INTO Departments (DepartmentName, Location) 
-VALUES 
+INSERT INTO Departments (DepartmentName, Location)
+VALUES
     ('Marketing', 'New York'),
     ('Research', 'Boston'),
     ('Development', 'San Francisco');
@@ -391,7 +390,7 @@ CREATE DATABASE EmployeeDB;
 
 -- With specific options
 CREATE DATABASE EmployeeDB
-ON PRIMARY 
+ON PRIMARY
 (
     NAME = 'EmployeeDB_Data',
     FILENAME = 'C:\Data\EmployeeDB_Data.mdf',
@@ -538,7 +537,7 @@ CREATE PROCEDURE HR.GetEmployeesByDepartment
 AS
 BEGIN
     SET NOCOUNT ON;
-    
+
     SELECT e.EmployeeID, e.FirstName, e.LastName, e.Salary
     FROM HR.Employees e
     JOIN Departments d ON e.DepartmentID = d.DepartmentID
@@ -557,7 +556,7 @@ ALTER PROCEDURE HR.GetEmployeesByDepartment
 AS
 BEGIN
     SET NOCOUNT ON;
-    
+
     SELECT e.EmployeeID, e.FirstName, e.LastName, e.Salary, e.Status
     FROM HR.Employees e
     JOIN Departments d ON e.DepartmentID = d.DepartmentID
@@ -571,8 +570,8 @@ END;
 **Execute Procedure:**
 ```sql
 -- Execute with named parameters
-EXEC HR.GetEmployeesByDepartment 
-    @DepartmentName = 'IT', 
+EXEC HR.GetEmployeesByDepartment
+    @DepartmentName = 'IT',
     @MinSalary = 50000;
 
 -- Execute with positional parameters
@@ -589,13 +588,13 @@ AS
 BEGIN
     INSERT INTO HR.Employees (FirstName, LastName, DepartmentID, Salary)
     VALUES (@FirstName, @LastName, @DepartmentID, @Salary);
-    
+
     SET @EmployeeID = SCOPE_IDENTITY();
 END;
 
 -- Execute with output parameter
 DECLARE @NewEmployeeID INT;
-EXEC HR.HireEmployee 
+EXEC HR.HireEmployee
     @FirstName = 'Jane',
     @LastName = 'Doe',
     @DepartmentID = 3,
@@ -628,7 +627,7 @@ AFTER UPDATE
 AS
 BEGIN
     SET NOCOUNT ON;
-    
+
     IF UPDATE(Salary)
     BEGIN
         INSERT INTO HR.SalaryAudit (EmployeeID, OldSalary, NewSalary, ChangeDate)
@@ -753,10 +752,10 @@ COMMIT TRANSACTION;
 -- Transaction with error handling
 BEGIN TRY
     BEGIN TRANSACTION;
-    
+
     UPDATE Accounts SET Balance = Balance - 100 WHERE AccountID = 1;
     UPDATE Accounts SET Balance = Balance + 100 WHERE AccountID = 2;
-    
+
     COMMIT TRANSACTION;
     PRINT 'Transaction committed successfully.';
 END TRY
@@ -864,14 +863,14 @@ SELECT LTRIM(RTRIM(Description)) FROM Products;
 SELECT GETDATE(), SYSDATETIME();
 
 -- Extract parts of a date
-SELECT 
+SELECT
     YEAR(HireDate) AS Year,
     MONTH(HireDate) AS Month,
     DAY(HireDate) AS Day
 FROM Employees;
 
 -- Date arithmetic
-SELECT 
+SELECT
     DATEADD(YEAR, 1, HireDate) AS OneYearAfterHire,
     DATEDIFF(DAY, HireDate, GETDATE()) AS DaysEmployed
 FROM Employees;
@@ -883,7 +882,7 @@ SELECT FORMAT(HireDate, 'yyyy-MM-dd') FROM Employees;
 **Mathematical Functions:**
 ```sql
 -- Rounding
-SELECT 
+SELECT
     ROUND(Salary, -3) AS RoundedToThousands,
     CEILING(Salary) AS RoundedUp,
     FLOOR(Salary) AS RoundedDown
@@ -893,7 +892,7 @@ FROM Employees;
 SELECT ABS(Balance - TargetBalance) FROM Accounts;
 
 -- Power and square root
-SELECT 
+SELECT
     POWER(2, 10) AS PowerOfTwo,
     SQRT(144) AS SquareRoot;
 ```
@@ -901,7 +900,7 @@ SELECT
 **Conversion Functions:**
 ```sql
 -- Convert data types
-SELECT 
+SELECT
     CAST(Salary AS INT) AS SalaryAsInt,
     CONVERT(VARCHAR(50), HireDate, 101) AS FormattedDate,
     TRY_PARSE('abc' AS INT) AS SafeParse
@@ -911,10 +910,10 @@ FROM Employees;
 **Logical Functions:**
 ```sql
 -- CASE expression
-SELECT 
+SELECT
     FirstName,
     Salary,
-    CASE 
+    CASE
         WHEN Salary > 80000 THEN 'High'
         WHEN Salary > 50000 THEN 'Medium'
         ELSE 'Low'
@@ -922,14 +921,14 @@ SELECT
 FROM Employees;
 
 -- ISNULL and COALESCE
-SELECT 
+SELECT
     FirstName,
     ISNULL(MiddleName, 'N/A') AS MiddleName,
     COALESCE(PreferredName, FirstName) AS DisplayName
 FROM Employees;
 
 -- IIF (inline IF)
-SELECT 
+SELECT
     FirstName,
     IIF(Salary > 60000, 'Above Average', 'Below Average') AS SalaryStatus
 FROM Employees;
@@ -937,7 +936,7 @@ FROM Employees;
 
 **Ranking Functions:**
 ```sql
-SELECT 
+SELECT
     FirstName,
     Salary,
     DepartmentID,
@@ -950,7 +949,7 @@ FROM Employees;
 
 **Window Functions:**
 ```sql
-SELECT 
+SELECT
     FirstName,
     DepartmentID,
     Salary,
@@ -963,13 +962,13 @@ FROM Employees;
 **System Functions:**
 ```sql
 -- User and session information
-SELECT 
+SELECT
     USER_NAME() AS CurrentUser,
     @@SERVERNAME AS ServerName,
     @@VERSION AS SQLServerVersion;
 
 -- Object information
-SELECT 
+SELECT
     OBJECT_ID('Employees') AS EmployeesTableID,
     SCHEMA_NAME(schema_id) AS SchemaName
 FROM sys.tables
@@ -979,41 +978,3 @@ WHERE name = 'Employees';
 ---
 
 This reference guide covers the major T-SQL concepts, syntax, and techniques. For specific database system variations or more advanced features, refer to the official documentation for your version of SQL Server.
-=======
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
-
-## Getting Started
-
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
->>>>>>> eebb427 (Initial commit from Create Next App)
