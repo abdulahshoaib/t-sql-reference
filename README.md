@@ -23,8 +23,6 @@
    - [RAND Function](#rand-function)
    - [Other Built-in Functions](#other-built-in-functions)
 
----
-
 ## Data Query Language (DQL)
 
 ### SELECT Statement
